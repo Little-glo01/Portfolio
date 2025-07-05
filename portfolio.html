@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Okunola Glorious | Portfolio</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Splash Screen -->
+  <div id="splash">
+    <img src="IMG-20250402-WA0017(1)[1].jpg" alt="Okunola Glorious">
+    <h1>Welcome to Okunola Glorious' Portfolio</h1>
+  </div>
+
+  <!-- Main Content -->
+  <div id="main-content" style="display: none;">
+    <header>
+        <img style="width: clamp(200px,50vw,350px)" src="IMG-20250402-WA0017(1)[1].jpg"/>
+      <h2>Hello, I'm Okunola Glorious</h2>
+      <p>A student studying Project Management at the Federal University of Technology, Akure</p>
+    
+    </header>
+
+
+    <!-- About Section -->
+    <section class="card" id="about">
+      <h3>About Me</h3>
+      <p>I am Okunola Glorious, a passionate and hardworking student of Project Management at the Federal University of Technology, Akure (FUTA). I am currently training in web development and enjoy building responsive websites while learning new skills that improve digital solutions.</p>
+    </section>
+
+    <!-- Skills Section -->
+    <section class="card" id="skills">
+      <h3>My Skills</h3>
+      <ul>
+        <li>HTML5</li>
+        <li>CSS3</li>
+        <li>Basic JavaScript</li>
+        <li>Responsive Web Design</li>
+        <li>Team Collaboration</li>
+        <li>Project Coordination (beginner level)</li>
+        <li>problem - solving</li>
+    </ul>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="card" id="projects">
+      <h3>My Projects</h3>
+      <ul>
+        <li>Personal Portfolio Website</li>
+        <li>Simple Calculator (using HTML, CSS, and JavaScript)</li>
+        <li>BMI Calculator (using JavaScript)</li>
+      </ul>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="card" id="contact">
+      <h3>Contact Me</h3>
+      <p>You can reach me at:</p>
+      <p><strong>Email:</strong> <a href="mailto:okunolaglorious01@gmail.com">okunolaglorious01@gmail.com</a></p>
+    </section>
+  </div>
+  <!-- Simple Calculator Section -->
+<section class="card" id="simple-calculator">
+  <h3>Simple Calculator</h3>
+  <input type="number" id="num1" placeholder="Enter first number">
+  <input type="number" id="num2" placeholder="Enter second number">
+  <select id="operator">
+    <option value="+">+</option>
+    <option value="-">−</option>
+    <option value="*">×</option>
+    <option value="/">÷</option>
+  </select>
+  <button onclick="calculate()">Calculate</button>
+  <p>Result: <span id="calc-result">--</span></p>
+</section>
+
+<!-- BMI Calculator Section -->
+<section class="card" id="bmi-calculator">
+  <h3>BMI Calculator</h3>
+  <input type="number" id="bmi-weight" placeholder="Weight in kg">
+  <input type="number" id="bmi-height" placeholder="Height in meters">
+  <button onclick="calculateBMI()">Calculate BMI</button>
+  <p>BMI Result: <span id="bmi-result">--</span></p>
+</section>
+
+<!-- GPA Calculator Section -->
+<section class="card" id="gpa-calculator">
+  <h3>GPA Calculator (5-Point Scale)</h3>
+  <textarea id="grades" rows="4" placeholder="Enter grades like: A B C A D"></textarea>
+  <button onclick="calculateGPA()">Calculate GPA</button>
+  <p>GPA Result: <span id="gpa-result">--</span></p>
+</section>
+
+<script>
+  // Splash Screen
+  window.addEventListener("load", () => {
+    setTimeout(() => {
+      document.getElementById("splash").style.display = "none";
+      document.getElementById("main-content").style.display = "block";
+    }, 3000);
+  });
+
+  // Simple Calculator
+  function calculate() {
+    const num1 = parseFloat(document.getElementById('num1').value);
+    const num2 = parseFloat(document.getElementById('num2').value);
+    const operator = document.getElementById('operator').value;
+    let result = 0;
+
+    switch(operator) {
+      case '+': result = num1 + num2; break;
+      case '-': result = num1 - num2; break;
+      case '*': result = num1 * num2; break;
+      case '/': result = num2 !== 0 ? num1 / num2 : 'Error: Divide by 0'; break;
+    }
+
+    document.getElementById('calc-result').textContent = result;
+  }
+
+  // BMI Calculator
+  function calculateBMI() {
+    const weight = parseFloat(document.getElementById('bmi-weight').value);
+    const height = parseFloat(document.getElementById('bmi-height').value);
+    if (weight > 0 && height > 0) {
+      const bmi = (weight / (height * height)).toFixed(2);
+      document.getElementById('bmi-result').textContent = bmi;
+    } else {
+      document.getElementById('bmi-result').textContent = "Invalid input";
+    }
+  }
+
+  // GPA Calculator
+  function calculateGPA() {
+    const input = document.getElementById('grades').value.trim().toUpperCase();
+    const gradeArray = input.split(/\s+/);
+    const points = { A: 5, B: 4, C: 3, D: 2, E: 1, F: 0 };
+    let total = 0, count = 0;
+
+    gradeArray.forEach(grade => {
+      if (points.hasOwnProperty(grade)) {
+        total += points[grade];
+        count++;
+      }
+    });
+
+    if (count > 0) {
+      const gpa = (total / count).toFixed(2);
+      document.getElementById('gpa-result').textContent = gpa;
+    } else {
+      document.getElementById('gpa-result').textContent = "Enter valid grades";
+    }
+  }
+</script>
+</body>
+</html>
